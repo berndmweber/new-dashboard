@@ -12,14 +12,13 @@ gem 'pg',               '~> 0.17.1'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',                 '~> 3.2.3'
-  gem 'bootstrap-sass',             '~> 3.0.3.0'
+  gem 'less-rails',                 '~> 2.4.2'
+  gem 'twitter-bootstrap-rails',    '~> 2.2.8'
+
   gem 'coffee-rails',               '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer',               :platforms => :ruby
-
-  gem "less-rails",                 '~> 2.4.2'
-  gem "twitter-bootstrap-rails",    '~> 2.2.8'
 
   gem 'uglifier',                   '>= 1.0.3'
 end
