@@ -13,12 +13,13 @@
 # gem 'pg'
 #
 development:
-  adapter: postgresql
+  host:     localhost
+  adapter:  postgresql
   encoding: unicode
   database: dashboard_development
   pool: 5
   username: dashboard
-  password:
+  password: abc123
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -39,17 +40,19 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: postgresql
+  host:     localhost
+  adapter:  postgresql
   encoding: unicode
   database: dashboard_test
   pool: 5
   username: dashboard
-  password:
+  password: abc123
 
 production:
-  adapter: postgresql
+  host:     localhost
+  adapter:  postgresql
   encoding: unicode
   database: dashboard_production
   pool: 5
   username: dashboard
-  password:
+  password: abc123
