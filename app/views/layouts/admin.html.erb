@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Dashboard" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Dashboard-Admin" %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -38,47 +38,38 @@
   </head>
   <body>
 
-    <%= nav_bar :fixed => :top, :brand => "Dashboard", :inverse => true, :responsive => true do %>
+    <%= nav_bar :fixed => :top, :brand => "Dashboard-Admin", :inverse => true, :responsive => true do %>
       <%= menu_group :pull => :left do %>
-        <%= menu_item "Home", root_path %>
-        <%= menu_item "Path 1", "#" %>
-        <%= menu_item "Path 2", "#" %>
+        <%= drop_down "Users" do %>
+          <%= menu_item "Index", admin_index_path %>
+          <%= menu_item "Create", new_admin_user_path %>
+        <% end %>
       <% end %>
       <%= menu_group :pull => :right do %>
         <% if current_user %>
-          <%= menu_item current_user.email, user_root_path %>
           <%= menu_item "Log Out", destroy_user_session_path, :method => 'delete' %>
         <% else %>
           <%= menu_item "Log in", new_user_session_path %>
         <% end %>
       <% end %>
-    <% end %>   
+   <% end %>   
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-<!--         <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div>--><!--/.well -->
-<!--        </div>--><!--/span-->
-        <div class="span9">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-    </div> <!-- /container -->
-    <div class="container-fluid" id="footer">
-      <div class="row-fluid">
-        <footer>
-          <p>&copy; nVisionary, Inc. 2014</p>
-        </footer>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span9">
+        <%= bootstrap_flash %>
+        <%= yield %>
       </div>
-    </div> <!-- /container -->
+    </div><!--/row-->
+  </div>
+
+  <div class="container-fluid" id="footer">
+    <div class="row-fluid">
+      <footer>
+        <p>&copy; nVisionary, Inc. 2014</p>
+      </footer>
+    </div>
+  </div> <!-- /container -->
 
   </body>
 </html>
