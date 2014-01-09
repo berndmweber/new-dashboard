@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140108212411) do
+ActiveRecord::Schema.define(:version => 20140109163231) do
+
+  create_table "customers", :force => true do |t|
+    t.string   "name"
+    t.string   "puppetmaster_url"
+    t.string   "puppetdb_url"
+    t.string   "githubrepo_url"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "customers", ["name"], :name => "index_customers_on_name", :unique => true
+
+  create_table "customers_users", :id => false, :force => true do |t|
+    t.integer "customer_id"
+    t.integer "user_id"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

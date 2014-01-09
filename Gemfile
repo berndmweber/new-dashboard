@@ -6,7 +6,7 @@ gem 'rails',            '3.2.16'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg',               '~> 0.17.1'
-
+gem "activeresource",   '~> 3.2.16'
 
 # Gems used only for assets and not required
 # in production environments by default.

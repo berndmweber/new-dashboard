@@ -1,0 +1,51 @@
+  <% if @customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% @customer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :puppetmaster_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :puppetmaster_url, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :puppetdb_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :puppetdb_url, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :githubrepo_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :githubrepo_url, :class => 'input-xlarge' %>
+    </div>
+  </div>
+<% if @customer.persisted? %>
+  <div class ="control-group">
+    <label class="control-label">Users</label>
+    <div class="controls">
+      <%= f.collection_select :user_ids, User.all, :id, :email, {:selected => @customer.user_ids}, {:multiple => true} %>
+    </div> 
+  </div>
+<% end %>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-success' %>
+      <%= button_tag "Reset", type: :reset, :class => 'btn btn-danger' %>
+      <%= link_to "Cancel", admin_customers_path, :class => 'btn btn-default' %>
+    </div>
+  </div>

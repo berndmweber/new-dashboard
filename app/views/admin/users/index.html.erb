@@ -5,6 +5,7 @@
     <th>ID</th>
     <th>Email</th>
     <th>Role</th>
+    <th>Customers</th>
     <th>Created at</th>
     <th>Actions</th>
   </tr>
@@ -17,6 +18,11 @@
     <td>
       <% for role in Role.find(:all) %>
         <%= role.name if user.roles.include?(role) %>
+      <% end %>
+    </td>
+    <td>
+      <% for customer in Customer.find(:all) %>
+        <%= customer.name if user.customers.include?(customer) %>
       <% end %>
     </td>
     <td><%= user.created_at %></td>

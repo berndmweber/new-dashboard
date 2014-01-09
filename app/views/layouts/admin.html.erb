@@ -46,6 +46,12 @@
             <%= menu_item "Create", new_admin_user_path %>
           <% end %>
         <% end %>
+        <%= drop_down "Customers" do %>
+          <%= menu_item "Index", admin_customers_path %>
+          <% if can? :update, @customers %>
+            <%= menu_item "Create", new_admin_customer_path %>
+          <% end %>
+        <% end %>
       <% end %>
       <%= menu_group :pull => :right do %>
         <% if current_user %>

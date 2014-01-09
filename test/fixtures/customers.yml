@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  puppetmaster_url: MyString
+  puppetdb_url: MyString
+  githubrepo_url: MyString
+
+two:
+  name: MyString
+  puppetmaster_url: MyString
+  puppetdb_url: MyString
+  githubrepo_url: MyString

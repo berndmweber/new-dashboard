@@ -1,6 +1,6 @@
 <% if @user.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this story from being saved:</h2>
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
     <ul>
     <% @user.errors.full_messages.each do |msg| %>
@@ -33,6 +33,14 @@
     <%= f.label role.name , :class => 'control-label' %>
     <div class="controls">
       <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %> 
+    </div> 
+  </div>
+<% end %>
+<% if @user.persisted? %>
+  <div class ="control-group">
+    <label class="control-label">Customers</label>
+    <div class="controls">
+      <%= f.collection_select :customer_ids, Customer.all, :id, :name, {:selected => @user.customer_ids}, {:multiple => true} %>
     </div> 
   </div>
 <% end %>

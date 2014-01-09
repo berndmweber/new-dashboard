@@ -1,9 +1,8 @@
 Dashboard::Application.routes.draw do
-  get "profiles/dashboard"
-
-  get "welcome/index"
   root :to => 'welcome#index'
-
+ 
+  get "profiles/dashboard"
+ 
   match '/profiles/dashboard' => 'profiles#dashboard', :as => :user_root
 
   devise_for :users, :path_names => {:sign_in => "login", :sign_out => "logout"}, :path => "d"
@@ -14,6 +13,7 @@ Dashboard::Application.routes.draw do
     match '/'     => 'users#index'
     match 'index' => 'users#index'
     resources :users
+    resources :customers
   end
 
   # The priority is based upon order of creation:

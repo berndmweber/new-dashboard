@@ -5,6 +5,7 @@
     <tr>
       <th>Email</th>
       <th>Role(s)</th>
+      <th>Customer(s)</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,11 @@
           <%= role.name if @user.roles.include?(role) %>
         <% end %>
       </td>
+    <td>
+      <% for customer in Customer.find(:all) %>
+        <%= customer.name if @user.customers.include?(customer) %>
+      <% end %>
+    </td>
     </tr>
   </tbody>
 </table>

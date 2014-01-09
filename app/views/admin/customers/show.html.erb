@@ -1,0 +1,40 @@
+<h1>Customer Detail</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped">
+  <tr>
+  	<td>Name:</td>
+  	<td><%= @customer.name %></td>
+  </tr>
+  <tr>
+	<td>Puppetmaster url:</td>
+    <td><%= @customer.puppetmaster_url %></td>
+  </tr>
+  <tr>
+    <td>Puppetdb url:</td>
+    <td><%= @customer.puppetdb_url %></td>
+  </tr>
+  <tr>
+    <td>Githubrepo url:</td>
+  	<td><%= @customer.githubrepo_url %></td>
+  </tr>
+  <tr>
+    <td>Users:</td>
+    <td>
+      <% for user in User.find(:all) %>
+        <%= user.email if @customer.users.include?(user) %>
+      <% end %>
+    </td>
+  </tr>
+ </table>
+
+<div class ="control-group">
+  <div class="controls">
+    <%= link_to "Back", admin_customers_path, :class => 'btn btn-default' %>
+<% if can? :update, @customer %>
+    <%= link_to "Edit", edit_admin_customer_path(@customer), :class => 'btn btn-default' %>
+    <%= link_to "Delete", admin_customer_path(@customer), :method => "delete", :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+<% end %>
+  </div>
+</div>

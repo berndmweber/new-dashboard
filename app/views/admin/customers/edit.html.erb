@@ -1,0 +1,5 @@
+<h1>Editing customer</h1>
+
+<%= form_for [:admin, @customer], :url => admin_customer_path(@customer), :method => :put, :html => { :class => "form-horizontal", :id => "edit_customer" } do |f| -%>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end -%>
