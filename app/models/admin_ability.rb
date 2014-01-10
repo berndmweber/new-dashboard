@@ -6,6 +6,7 @@ class AdminAbility
       can :manage, :all
     elsif user.role? :developer
       can :read, :all
+      # can :manage, Util, :generate_cert => false
     end
     # Define abilities for the passed in user here. For example:
     #

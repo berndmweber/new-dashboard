@@ -1,0 +1,75 @@
+<h1>Generate SSL certificates for use with Puppet masters</h1>
+
+<div id="flash_notice" style="display:none"></div>
+
+<%= form_for :cert, :url => admin_utils_generate_cert_path, :remote => true, :html => { :class => "form-horizontal", :id => "generate_certificate" } do |f| -%>
+  <legend>Cert input data</legend>
+  <div class="control-group">
+    <%= f.label :certname, "Name on Certificate", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :certname, :class => 'input-xlarge', :value => @certname %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :certdomain, "Domain on Certificate", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :certdomain, :class => 'input-xlarge', :value => @certdomain %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :certcomment, "Comment on Certificate", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :certcomment, :class => 'input-xlarge', :value => @certcomment %>
+    </div>
+  </div>
+  <div class ="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-success', :value => "Create Cert" %>
+      <%= button_tag "Reset", type: :reset, :class => 'btn btn-danger' %>
+      <%= link_to "Cancel", admin_users_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end -%>
+<%= form_for :certificate, :url => admin_utils_save_to_file_path, :remote => true, :html => { :class => "form-horizontal", :id => "generated_certificate" } do |f| -%>
+  <legend>Generated cert data</legend>
+  <div class="control-group">
+    <%= f.label :cert, "Certificate", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :cert, :class => 'form-control', :size => '', :value => @cert, :readonly => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :certpath, "Certificate path", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :certpath, :class => 'input-xlarge', :value => @certpath %>
+    </div>
+  </div>
+  <div class ="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-success', :value => "Save to file" %>
+      <%= button_tag "Reset", type: :reset, :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end -%>
+<%= form_for :certificate, :url => admin_utils_save_to_file_path, :remote => true, :html => { :class => "form-horizontal", :id => "generated_certificate_key" } do |f| -%>
+  <legend>Generated cert key</legend>
+  <div class="control-group">
+    <%= f.label :key, "Key", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :cert, :class => 'form-control', :size => '', :value => @key, :readonly => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :certkeypath, "Certificate Key path", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :certpath, :class => 'input-xlarge', :value => @certkeypath %>
+    </div>
+  </div>
+  <div class ="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-success', :value => "Save to file" %>
+      <%= button_tag "Reset", type: :reset, :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end -%>
+

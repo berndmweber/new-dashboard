@@ -52,6 +52,9 @@
             <%= menu_item "Create", new_admin_customer_path %>
           <% end %>
         <% end %>
+        <%= drop_down "Utilities" do %>
+          <%= menu_item "Generate Certs", admin_utils_generate_cert_path %>
+        <% end %>
       <% end %>
       <%= menu_group :pull => :right do %>
         <% if current_user %>

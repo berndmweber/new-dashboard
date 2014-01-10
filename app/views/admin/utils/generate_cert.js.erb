@@ -1,0 +1,12 @@
+/*Hide the flash notice div*/
+$("#flash_notice").hide(300);
+
+/*Update the html of the div post_errors with the new one*/
+$("#flash_notice").html("<div class=\"alert fade in alert-success\">New certificate and key generated</div>");
+
+/*Show the div post_errors*/
+$("#flash_notice").show(300);
+
+$("#certificate_cert").val("<%= @cert.to_s.gsub!(/\n/, '\n') %>");
+$("#certificate_key_key").val("<%= @key.to_s.gsub!(/\n/, '\n') %>");
+

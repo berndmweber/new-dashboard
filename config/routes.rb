@@ -14,6 +14,9 @@ Dashboard::Application.routes.draw do
     match 'index' => 'users#index'
     resources :users
     resources :customers
+    get "utils/generate_cert"
+    post "utils/generate_cert"
+    post "utils/save_to_file"
   end
 
   # The priority is based upon order of creation:
