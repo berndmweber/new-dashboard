@@ -1,7 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+roles0:
+  name: Admin
+  created_at: '2014-01-08 21:39:13.406497'
+  updated_at: '2014-01-08 21:39:13.406497'
 
-two:
-  name: MyString
+roles1:
+  name: Developer
+  created_at: '2014-01-08 21:40:08.06289'
+  updated_at: '2014-01-08 21:40:08.06289'
+
+roles2:
+  name: User
+  created_at: '2014-01-08 21:40:18.67791'
+  updated_at: '2014-01-08 21:40:18.67791'
+

@@ -46,7 +46,7 @@ class Admin::CustomersController < Admin::AdminController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to admin_customers_path, notice: 'Customer was successfully created.' }
+        format.html { redirect_to admin_customer_path(@customer), notice: 'Customer was successfully created.' }
         format.json { render json: @customer, status: :created, location: @customer }
       else
         format.html { render action: "new" }
@@ -78,7 +78,7 @@ class Admin::CustomersController < Admin::AdminController
     @customer.destroy
 
     respond_to do |format|
-      format.html { redirect_to customers_url }
+      format.html { redirect_to admin_customers_path }
       format.json { head :no_content }
     end
   end

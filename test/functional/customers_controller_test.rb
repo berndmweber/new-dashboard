@@ -1,8 +1,12 @@
 require 'test_helper'
 
-class CustomersControllerTest < ActionController::TestCase
+class Admin::CustomersControllerTest < ActionController::TestCase
+  fixtures :users
+
   setup do
-    @customer = customers(:one)
+    @customer = customers(:customers0)
+    @user = users(:users0)
+    sign_in @user
   end
 
   test "should get index" do
@@ -17,11 +21,12 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should create customer" do
+    Customer.delete_all
     assert_difference('Customer.count') do
       post :create, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url, puppetmaster_url: @customer.puppetmaster_url }
     end
 
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_redirected_to admin_customer_path(assigns(:customer))
   end
 
   test "should show customer" do
@@ -36,7 +41,7 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should update customer" do
     put :update, id: @customer, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url, puppetmaster_url: @customer.puppetmaster_url }
-    assert_redirected_to customer_path(assigns(:customer))
+    assert_redirected_to admin_customer_path(assigns(:customer))
   end
 
   test "should destroy customer" do
@@ -44,6 +49,6 @@ class CustomersControllerTest < ActionController::TestCase
       delete :destroy, id: @customer
     end
 
-    assert_redirected_to customers_path
+    assert_redirected_to admin_customers_path
   end
 end

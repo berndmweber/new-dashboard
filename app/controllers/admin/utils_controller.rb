@@ -13,8 +13,8 @@ class Admin::UtilsController < Admin::AdminController
       @certcomment = "Puppet Dashboard"
     end
     if !params['certificate'].blank?
-      @certpath = params['certificate']['certpath'].blank? ? "Puppet Dashboard" : params['certificate']['certpath']
-      @certkeypath = params['certificate']['certkeypath'].blank? ? "Puppet Dashboard" : params['certificate']['certkeypath']
+      @certpath = params['certificate']['certpath'].blank? ? 'config/ssl/dashboard.pem' : params['certificate']['certpath']
+      @certkeypath = params['certificate']['certkeypath'].blank? ? 'config/ssl/dashboard.key' : params['certificate']['certkeypath']
     else
       @certpath = 'config/ssl/dashboard.pem'
       @certkeypath = 'config/ssl/dashboard.key'
