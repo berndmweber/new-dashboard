@@ -1,0 +1,29 @@
+<h1>Listing puppetmasters</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Port</th>
+      <th>Sslcert</th>
+      <th>Sslkey</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @puppetmasters.each do |puppetmaster| %>
+    <tr>
+      <td><%= link_to puppetmaster.url, admin_puppetmaster_path(puppetmaster) %></td>
+      <td><%= puppetmaster.port %></td>
+      <td><%= puppetmaster.sslCert %></td>
+      <td><%= puppetmaster.sslKey %></td>
+      <td>
+        <%= link_to 'Show', admin_puppetmaster_path(puppetmaster), :class => "btn btn-link" %>
+        <%= link_to 'Edit', edit_admin_puppetmaster_path(puppetmaster), :class => "btn btn-link" %>
+        <%= link_to 'Destroy', admin_puppetmaster_path(puppetmaster), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+

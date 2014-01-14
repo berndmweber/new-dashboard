@@ -75,6 +75,9 @@ class Admin::CustomersController < Admin::AdminController
   # DELETE /customers/1.json
   def destroy
     @customer = Customer.find(params[:id])
+    for pm in Puppetmaster.find(:all)
+      pm.destroy if @customer.puppetmasters.include?(pm)
+    end
     @customer.destroy
 
     respond_to do |format|

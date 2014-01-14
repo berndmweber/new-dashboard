@@ -1,7 +1,6 @@
 
 customers0:
   name: Digitaltrends
-  puppetmaster_url: http://puppetmaster.iad.digitaltrends.com
   puppetdb_url: http://puppetmaster.iad.digitaltrends.com:8081
   githubrepo_url: https://github.com/DigitalTrends/digitaltrends-puppet
   created_at: '2014-01-09 17:31:50.551343'

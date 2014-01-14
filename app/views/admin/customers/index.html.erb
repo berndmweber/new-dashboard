@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Puppetmaster url</th>
+      <th>Puppetmasters</th>
       <th>Puppetdb url</th>
       <th>Githubrepo url</th>
       <th>Actions</th>
@@ -14,14 +14,20 @@
 <% @customers.each do |customer| %>
     <tr>
       <td><%= link_to customer.name, admin_customer_path(customer) %></td>
-      <td><%= customer.puppetmaster_url %></td>
+      <td>
+        <% for pm in Puppetmaster.find(:all) %>
+          <%= pm.url if customer.puppetmasters.include?(pm) %>
+        <% end %>
+      </td>
       <td><%= customer.puppetdb_url %></td>
       <td><%= customer.githubrepo_url %></td>
-      <td><%= link_to 'Show', admin_customer_path(customer), :class => "btn btn-link" %></td>
+      <td>
+        <%= link_to 'Show', admin_customer_path(customer), :class => "btn btn-link" %>
       <% if can? :update, customer %>
-        <td><%= link_to 'Edit', edit_admin_customer_path(customer), :class => "btn btn-link" %></td>
-        <td><%= link_to 'Destroy', admin_customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link" %></td>
+        <%= link_to 'Edit', edit_admin_customer_path(customer), :class => "btn btn-link" %>
+        <%= link_to 'Destroy', admin_customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-link" %>
       <% end %>
+      </td>
     </tr>
 <% end %>
   </tbody>

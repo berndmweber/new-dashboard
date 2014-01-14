@@ -1,0 +1,48 @@
+  <% if @puppetmaster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@puppetmaster.errors.count, "error") %> prohibited this puppetmaster from being saved:</h2>
+
+      <ul>
+      <% @puppetmaster.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="hidden"><%= f.hidden_field :customer_id, :value => @puppetmaster.customer_id %></div>
+  <div class="control-group">
+    <%= f.label :url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :url, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :port, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :port, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sslCert, "SSL Certificate file path", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sslCert, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sslKey, "SSL Key file path", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sslKey, :class => 'input-xlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-success' %>
+<% if @puppetmaster.persisted? %>
+      <%= link_to "Delete", admin_puppetmaster_path(@puppetmaster), :method => "delete", :confirm => "Are you sure?", :class => 'btn btn-danger', :role => 'button' %>
+<% else %>
+      <%= button_tag "Reset", type: :reset, :class => 'btn btn-danger' %>
+<% end %>
+      <%= link_to "Cancel", admin_customer_path(@puppetmaster.customer_id), :class => 'btn btn-default', :role => 'button' %>
+    </div>
+  </div>

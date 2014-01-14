@@ -23,7 +23,7 @@ class Admin::CustomersControllerTest < ActionController::TestCase
   test "should create customer" do
     Customer.delete_all
     assert_difference('Customer.count') do
-      post :create, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url, puppetmaster_url: @customer.puppetmaster_url }
+      post :create, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url }
     end
 
     assert_redirected_to admin_customer_path(assigns(:customer))
@@ -40,7 +40,7 @@ class Admin::CustomersControllerTest < ActionController::TestCase
   end
 
   test "should update customer" do
-    put :update, id: @customer, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url, puppetmaster_url: @customer.puppetmaster_url }
+    put :update, id: @customer, customer: { githubrepo_url: @customer.githubrepo_url, name: @customer.name, puppetdb_url: @customer.puppetdb_url }
     assert_redirected_to admin_customer_path(assigns(:customer))
   end
 

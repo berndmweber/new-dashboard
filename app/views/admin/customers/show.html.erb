@@ -8,8 +8,15 @@
   	<td><%= @customer.name %></td>
   </tr>
   <tr>
-	<td>Puppetmaster url:</td>
-    <td><%= @customer.puppetmaster_url %></td>
+	<td>Puppetmasters:</td>
+    <td>
+      <% for pm in Puppetmaster.find(:all) %>
+        <% if @customer.puppetmasters.include?(pm) %>
+          <%= link_to pm.url, edit_admin_puppetmaster_path(pm) %>
+        <% end %>
+      <% end; %>
+      <%= link_to "New", new_admin_puppetmaster_path(:customer => @customer.id), :class => 'btn btn-primary', :role => 'button' %>
+    </td>
   </tr>
   <tr>
     <td>Puppetdb url:</td>
@@ -31,10 +38,10 @@
 
 <div class ="control-group">
   <div class="controls">
-    <%= link_to "Back", admin_customers_path, :class => 'btn btn-default' %>
+    <%= link_to "Back", admin_customers_path, :class => 'btn btn-default', :role => 'button' %>
 <% if can? :update, @customer %>
-    <%= link_to "Edit", edit_admin_customer_path(@customer), :class => 'btn btn-default' %>
-    <%= link_to "Delete", admin_customer_path(@customer), :method => "delete", :confirm => "Are you sure?", :class => 'btn btn-danger' %>
+    <%= link_to "Edit", edit_admin_customer_path(@customer), :class => 'btn btn-default', :role => 'button' %>
+    <%= link_to "Delete", admin_customer_path(@customer), :method => "delete", :confirm => "Are you sure?", :class => 'btn btn-danger', :role => 'button' %>
 <% end %>
   </div>
 </div>

@@ -1,0 +1,42 @@
+<h1>Puppetmaster Detail</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped">
+  <tr>
+  	<td>Url:</td>
+  	<td><%= @puppetmaster.url %></td>
+  </tr>
+  <tr>
+    <td>Port:</td>
+    <td><%= @puppetmaster.port %></td>
+  </tr>
+  <tr>
+    <td>SSL Certificate path:</td>
+  	<td><%= @puppetmaster.sslCert %></td>
+  </tr>
+  <tr>
+    <td>SSL Certificate key:</td>
+  	<td><%= @puppetmaster.sslKey %></td>
+  </tr>
+  <tr>
+	<td>Customer:</td>
+    <td>
+      <% for customer in Customer.find(:all) %>
+        <% if customer.puppetmasters.include?(@puppetmaster) %>
+          <%= link_to customer.name, admin_customer_path(customer) %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+ </table>
+
+<div class ="control-group">
+  <div class="controls">
+    <%= link_to "Back", admin_puppetmasters_path, :class => 'btn btn-default', :role => 'button' %>
+<% if can? :update, @puppetmaster %>
+    <%= link_to "Edit", edit_admin_puppetmaster_path(@puppetmaster), :class => 'btn btn-default', :role => 'button' %>
+    <%= link_to "Delete", admin_puppetmaster_path(@puppetmaster), :method => "delete", :confirm => "Are you sure?", :class => 'btn btn-danger', :role => 'button' %>
+<% end %>
+  </div>
+</div>

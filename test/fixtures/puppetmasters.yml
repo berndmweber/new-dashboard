@@ -1,0 +1,10 @@
+
+puppetmasters0:
+  url: https://puppetmaster.nvisionary.com
+  port: '8140'
+  sslCert: config/ssl/dashboard.pem
+  sslKey: config/ssl/dashboard.key
+  created_at: '2014-01-14 01:00:41.681696'
+  updated_at: '2014-01-14 01:00:41.681696'
+  customer_id: '1'
+

@@ -15,4 +15,8 @@ module Admin::UtilsHelper
       file.close unless file == nil
     end
   end
+
+  def file_exists (filename)
+    return File.file?(filename)
+  end
 end

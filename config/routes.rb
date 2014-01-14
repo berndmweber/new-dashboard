@@ -14,6 +14,7 @@ Dashboard::Application.routes.draw do
     match 'index' => 'users#index'
     resources :users
     resources :customers
+    resources :puppetmasters
     get "utils/generate_cert"
     post "utils/generate_cert"
     post "utils/save_to_file"
