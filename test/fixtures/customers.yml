@@ -2,7 +2,7 @@
 customers0:
   name: Puppet Labs
   puppetdb_url: http://puppetmaster.puppetlabs.com:8081
-  githubrepo_url: https://github.com/PuppetLabs/puppet
+  githubrepo_url: https://github.com/PuppetLabs/puppet.git
   created_at: '2014-01-09 17:31:50.551343'
   updated_at: '2014-01-09 17:31:50.551343'
   users: users0, users1
