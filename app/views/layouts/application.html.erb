@@ -46,8 +46,29 @@
       <% end %>
       <%= menu_group :pull => :right do %>
         <% if current_user %>
-          <%= menu_item current_user.email, user_root_path %>
-          <%= menu_item "Log Out", destroy_user_session_path, :method => 'delete' %>
+          <%= drop_down current_user.email do %>
+            <% if (current_user.role? :admin) || (current_user.role? :developer) %>
+              <%= menu_item "Admin console", user_root_path %>
+            <% else %>
+              <%= menu_item "Profile", user_root_path %>
+            <% end %>
+            <%= drop_down_divider %>
+            <% if !current_user.customers.empty? -%>
+              <%= drop_down_submenu 'Customers' do %>
+                <% for customer in Customer.find(:all) %>
+                  <% if current_user.customers.include?(customer) -%>
+                    <% if !session[:current_customer].empty? && (session[:current_customer] == customer.id.to_s) -%>
+                      <li class="active"><%= link_to customer.name, "#" %></li>
+                    <% else -%>
+                      <li><%= link_to customer.name, root_path(:current_customer => customer.id) %></li>
+                    <% end -%>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <%= drop_down_divider %>
+            <% end %>
+            <%= menu_item "Log Out", destroy_user_session_path, :method => 'delete' %>
+          <% end %>
         <% else %>
           <%= menu_item "Log in", new_user_session_path %>
         <% end %>
