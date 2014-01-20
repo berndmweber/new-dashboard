@@ -2,7 +2,7 @@
 
 <div id="flash_notice" style="display:none"></div>
 
-<%= form_for :cert, :url => admin_utils_generate_cert_path, :remote => true, :html => { :class => "form-horizontal", :id => "generate_certificate" } do |f| -%>
+<%= form_for :cert, :url => admin_utils_generate_csr_path, :remote => true, :html => { :class => "form-horizontal", :id => "generate_certificate" } do |f| -%>
   <legend>Cert input data</legend>
   <div class="control-group">
     <%= f.label :certname, "Name on Certificate", :class => 'control-label' %>
@@ -16,12 +16,6 @@
       <%= f.text_field :certdomain, :class => 'input-xlarge', :value => @certdomain %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :certcomment, "Comment on Certificate", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :certcomment, :class => 'input-xlarge', :value => @certcomment %>
-    </div>
-  </div>
   <div class ="control-group">
     <div class="controls">
       <%= f.submit :class => 'btn btn-success', :value => "Create Cert" %>
@@ -30,10 +24,10 @@
     </div>
   </div>
 <% end -%>
-<%= form_for :certificate, :url => admin_utils_save_to_file_path, :remote => true, :html => { :class => "form-horizontal", :id => "generated_certificate" } do |f| -%>
-  <legend>Generated cert data</legend>
+<%= form_for :certificate, :url => admin_utils_save_to_file_path, :remote => true, :html => { :class => "form-horizontal", :id => "generated_certificate_req" } do |f| -%>
+  <legend>Generated cert request data</legend>
   <div class="control-group">
-    <%= f.label :cert, "Certificate", :class => 'control-label' %>
+    <%= f.label :cert, "Certificate Request", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_area :cert, :class => 'form-control', :size => '', :value => @cert, :readonly => true %>
     </div>

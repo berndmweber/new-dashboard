@@ -16,3 +16,4 @@
 Gemfile.lock
 config/ssl/*.key
 config/ssl/*.pem
+config/ssl/*.csr

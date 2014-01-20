@@ -1,5 +1,6 @@
 class Admin::PuppetmastersController < Admin::AdminController
   load_and_authorize_resource
+  include Admin::UtilsHelper
 
   # GET /puppetmasters
   # GET /puppetmasters.json
@@ -29,8 +30,8 @@ class Admin::PuppetmastersController < Admin::AdminController
     @puppetmaster = Puppetmaster.new
     @puppetmaster.url = 'https://' if @puppetmaster.url.blank?
     @puppetmaster.port = '8140' if @puppetmaster.port.blank?
-    @puppetmaster.sslCert = 'config/ssl/dashboard.pem' if @puppetmaster.sslCert.blank?
-    @puppetmaster.sslKey = 'config/ssl/dashboard.key' if @puppetmaster.sslKey.blank?
+    @puppetmaster.sslCsr = 'config/ssl/dashboard.nvisionary.com.csr' if @puppetmaster.sslCsr.blank?
+    @puppetmaster.sslKey = 'config/ssl/dashboard.nvisionary.com.key' if @puppetmaster.sslKey.blank?
     @puppetmaster.customer_id = params[:customer] if @puppetmaster.customer_id.blank?
 
     respond_to do |format|
@@ -86,6 +87,41 @@ class Admin::PuppetmastersController < Admin::AdminController
     respond_to do |format|
       format.html { redirect_to admin_customer_path(customer) }
       format.json { head :no_content }
+    end
+  end
+
+  def check_connection_status
+    @puppetmaster = Puppetmaster.find(params[:id])
+    if file_exists(@puppetmaster.sslCert)
+      @connection_status = can_connect_to(@puppetmaster.url, @puppetmaster.port, "/production/facts/puppetmaster.nvisionary.com", @puppetmaster.sslCert, @puppetmaster.sslKey) ? "Connected" : "Not Connected"
+    else
+      @connection_status = "Need pairing"
+    end
+
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
+  end
+
+  def pair_with_puppetmaster
+    @puppetmaster = Puppetmaster.find(params[:id])
+    if file_exists(@puppetmaster.sslCert)
+      @connection_status = "Connected"
+    else
+      @connection_status = submit_csr(@puppetmaster.url, @puppetmaster.port, "/production/certificate_request/", @puppetmaster.sslCsr) ? "Request sent" : "Error"
+      if @connection_status == "Request sent"
+        @connection_status = get_signed_cert(@puppetmaster.url, @puppetmaster.port, "/production/certificate/", @puppetmaster.sslCsr)
+        if !@connection_status
+          @connection_status = "Request sent"
+        else
+          @puppetmaster.update_attribute(:sslCert, @connection_status)
+          @connection_status = "Connected"
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.js { render :layout => false }
     end
   end
 end

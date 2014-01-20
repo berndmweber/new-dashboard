@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require twitter/bootstrap
 //= require_tree .
+
+$(function() {
+    $("#progressbar").progressbar({
+      value: false
+    });
+    $("#progressbar").prepend("<div id=\"progressbar-label\" class=\"progress-label\">Checking current status</div>");
+    setTimeout(updateProgress, 1000);
+});

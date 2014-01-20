@@ -23,10 +23,11 @@ group :assets do
   gem 'uglifier',                   '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails',             '~> 3.0.4'
+gem 'jquery-ui-sass-rails',     '~> 4.0.2.1'
 
-gem 'devise',           '~> 3.2.2'
-gem 'cancan',           '~> 1.6.10'
+gem 'devise',                   '~> 3.2.2'
+gem 'cancan',                   '~> 1.6.10'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

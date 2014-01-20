@@ -1,6 +1,7 @@
 <h1>Puppetmaster Detail</h1>
 
 <p id="notice"><%= notice %></p>
+<div id="flash_notice" style="display:none"></div>
 
 <table class="table table-striped">
   <tr>
@@ -12,24 +13,34 @@
     <td><%= @puppetmaster.port %></td>
   </tr>
   <tr>
+    <td>SSL Certificate request (CSR) path:</td>
+    <td><%= @puppetmaster.sslCsr %></td>
+  </tr>
+  <tr>
     <td>SSL Certificate path:</td>
-  	<td><%= @puppetmaster.sslCert %></td>
+    <td id="sslCertPath"><%= @puppetmaster.sslCert %></td>
   </tr>
   <tr>
     <td>SSL Certificate key:</td>
   	<td><%= @puppetmaster.sslKey %></td>
   </tr>
   <tr>
-	<td>Customer:</td>
+	  <td>Customer:</td>
     <td>
-      <% for customer in Customer.find(:all) %>
-        <% if customer.puppetmasters.include?(@puppetmaster) %>
-          <%= link_to customer.name, admin_customer_path(customer) %>
-        <% end %>
-      <% end %>
+      <% customer = Customer.find(@puppetmaster.customer_id) -%>
+      <%= link_to customer.name, admin_customer_path(customer) %>
     </td>
   </tr>
- </table>
+   <tr>
+    <td>Connection Status:</td>
+    <td>
+      <div id="connection_status" style="display:none" data-id="<%= @puppetmaster.id %>">
+        <%= link_to "Pair", pair_with_puppetmaster_admin_puppetmaster_path(@puppetmaster.id), :remote => true, :class => 'btn btn-primary', :role => 'button', :id => "pair_button", :style => "display:none" %>
+      </div>
+      <div id="progressbar"></div>
+    </td>
+  </tr>
+</table>
 
 <div class ="control-group">
   <div class="controls">

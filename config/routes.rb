@@ -14,10 +14,16 @@ Dashboard::Application.routes.draw do
     match 'index' => 'users#index'
     resources :users
     resources :customers
-    resources :puppetmasters
-    get "utils/generate_cert"
-    post "utils/generate_cert"
+    resources :puppetmasters do
+      member do
+        get 'check_connection_status'
+        get 'pair_with_puppetmaster'
+      end
+    end
+    get "utils/generate_csr"
+    post "utils/generate_csr"
     post "utils/save_to_file"
+
   end
 
   # The priority is based upon order of creation:

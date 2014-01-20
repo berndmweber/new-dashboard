@@ -3,7 +3,7 @@ class Puppetmaster < ActiveRecord::Base
 
   belongs_to :customer
 
-  attr_accessible :port, :sslCert, :sslKey, :url, :customer_id
+  attr_accessible :port, :sslCert, :sslCsr, :sslKey, :url, :customer_id
 
   validates :url, :customer_id, presence: true
   validates :url, format: { with: /^https:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})/,
@@ -12,7 +12,9 @@ class Puppetmaster < ActiveRecord::Base
   validates :port, numericality: { :greater_than => 0 }
   validates :port, numericality: { :less_than_or_equal_to => 65535 }
 
-  validates :sslCert, presence: true, file: true
+  validates :sslCert, file: true
+
+  validates :sslCsr, presence: true, file: true
 
   validates :sslKey, presence: true, file: true
 end

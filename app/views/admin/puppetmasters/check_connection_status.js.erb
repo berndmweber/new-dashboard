@@ -1,0 +1,13 @@
+$("#progressbar").hide();
+<% case @connection_status -%>
+  <% when /Connected/ -%>
+	$("#connection_status").prepend("Connected").addClass("text-success").effect("highlight");
+  <% when /Not Connected/ -%>
+	$("#connection_status").prepend("Not connected").addClass("text-error").effect("highlight");
+  <% when /Need pairing/ -%>
+	$("#connection_status").prepend("Needs pairing").addClass("text-info").effect("highlight");
+	$("#pair_button").show();
+  <% else -%>
+    $("#connection_status").prepend("Unknown issue").addClass("text-error").effect("highlight");
+<% end -%>
+$("#connection_status").show();

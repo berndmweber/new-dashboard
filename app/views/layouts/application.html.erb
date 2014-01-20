@@ -49,15 +49,15 @@
           <%= drop_down current_user.email do %>
             <% if (current_user.role? :admin) || (current_user.role? :developer) %>
               <%= menu_item "Admin console", user_root_path %>
-            <% else %>
-              <%= menu_item "Profile", user_root_path %>
             <% end %>
+            <%= drop_down_divider %>
+            <%= menu_item "Profile", user_root_path %>
             <%= drop_down_divider %>
             <% if !current_user.customers.empty? -%>
               <%= drop_down_submenu 'Customers' do %>
                 <% for customer in Customer.find(:all) %>
                   <% if current_user.customers.include?(customer) -%>
-                    <% if !session[:current_customer].empty? && (session[:current_customer] == customer.id.to_s) -%>
+                    <% if !session[:current_customer].blank? && (session[:current_customer] == customer.id.to_s) -%>
                       <li class="active"><%= link_to customer.name, "#" %></li>
                     <% else -%>
                       <li><%= link_to customer.name, root_path(:current_customer => customer.id) %></li>

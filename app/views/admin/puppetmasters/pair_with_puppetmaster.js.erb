@@ -1,0 +1,31 @@
+var puppetmaster_id = $("#connection_status").attr("data-id");
+<% case @connection_status -%>
+  <% when /Waiting/ -%>
+    $("#connection_status").hide();
+	$("#pair_button").hide();
+	$(".progress-label").text("Pairing");
+  	$("#progressbar").show();
+  	setTimeout(function(){$.getScript(puppetmaster_id + "/pair_with_puppetmaster.js");}, 1000);
+  <% when /Request sent/ -%>
+    $("#connection_status").hide();
+	$("#pair_button").hide();
+	$(".progress-label").text("Waiting for CSR signature");
+  	// $("#progressbar").progressbar( "option", { value: 50 }).show();
+  	$("#progressbar").show();
+   	setTimeout(function(){$.getScript(puppetmaster_id + "/pair_with_puppetmaster.js");}, 5000);
+  <% when /Connected/ -%>
+	$("#pair_button").hide();
+  	$("#progressbar").hide();
+	$("#connection_status").text("Connected").switchClass("text-info", "text-success", 1).effect("highlight");
+    if (!$("#connection_status").is(":visible")) {
+	    $("#connection_status").show();
+	}
+	$("#sslCertPath").text("<%= @puppetmaster.sslCert %>");
+ <% else -%>
+	$("#pair_button").hide();
+  	$("#progressbar").hide();
+    $("#connection_status").text("Unknown issue").switchClass(, "text-info""text-error", 1).effect("highlight");
+    if (!$("#connection_status").is(":visible")) {
+    	$("#connection_status").show();
+    }
+<% end -%>
